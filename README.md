@@ -19,3 +19,5 @@ npm start
 localhost:3000/
 
 ## live demo
+
+[Live](https://todo-app-sand-phi.vercel.app/)

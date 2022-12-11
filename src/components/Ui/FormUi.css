@@ -1,0 +1,19 @@
+.todo-input-container {
+  border-radius: 7px;
+  background-color: var(--color-light-grey-dark);
+  width: 60%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.todo-input {
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media (max-width: 968px) {
+  .todo-input-container {
+    width: 90%;
+  }
+}

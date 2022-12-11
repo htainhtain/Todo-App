@@ -1,0 +1,12 @@
+.todo-card-container {
+  border-bottom: 1px solid var(--color-light-greyish-blue-hover-dark);
+  /* height: 40px; */
+  padding: 15px 0px;
+}
+
+.todo-card {
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

@@ -1,0 +1,60 @@
+/* check box */
+.todo-checkbox-button-container {
+  position: relative;
+}
+
+#todo-checkbox-button {
+  position: absolute;
+  opacity: 0;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.checkbox-button-check-mark {
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+  border: 2px solid var(--color-light-greyish-blue-hover-dark);
+  border-radius: 50%;
+  transition: all ease-in-out 0.2s;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox-button-check-mark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.todo-checkbox-button-container
+  #todo-checkbox-button:checked
+  ~ .checkbox-button-check-mark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.todo-checkbox-button-container .checkbox-button-check-mark:after {
+  left: 10.5px;
+  top: 6px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* On mouse-over, add a grey background color */
+.todo-checkbox-button-container:hover
+  #todo-checkbox-button
+  ~ .checkbox-button-check-mark {
+  background-color: var(--color-light-greyish-blue-dark);
+}
+
+.todo-checkbox-button-container
+  #todo-checkbox-button:checked
+  ~ .checkbox-button-check-mark {
+  background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}

@@ -1,0 +1,26 @@
+/* input  */
+.todo-text-area {
+  width: 100%;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: none;
+  color: var(--color-text-dark);
+  font-size: 18px;
+  transition: text-decoration ease 0.2s;
+}
+
+input[type="text"]:focus {
+  outline: none !important;
+}
+
+@media (max-width: 968px) {
+  #todo {
+    width: 100%;
+  }
+}

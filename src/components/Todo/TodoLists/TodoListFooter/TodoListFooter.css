@@ -1,0 +1,7 @@
+.todo-list-footer{
+    margin: 15px 0px;
+    padding: 0px 20px;
+    color: var(--color-text-light-dark);
+    display: flex;
+    justify-content: space-between;
+}

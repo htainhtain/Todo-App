@@ -1,0 +1,24 @@
+/* input  */
+.todo-text-area {
+  width: 100%;
+}
+
+.todo-list-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: none;
+  color: var(--color-text-light-dark);
+  font-size: 18px;
+}
+
+input[type="text"]:focus {
+  outline: none !important;
+}
+
+input[type="text"].line-through {
+  text-decoration: line-through;
+  color: var(--color-text-light-dark);
+}

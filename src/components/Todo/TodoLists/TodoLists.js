@@ -9,7 +9,6 @@ import TodoListCard from "../../Ui/TodoListCard";
 import DeleteIconMui from "../../Ui/Icons/DeleteIconMui";
 import EditIconMui from "../../Ui/Icons/EditIconMui";
 
-
 const TodoLists = (props) => {
   const [todoStatus, SetTodoStatus] = useState({});
 
@@ -84,7 +83,7 @@ const TodoLists = (props) => {
     <TodoListCard>
       {props.todos.map((element, index) => {
         return (
-          <TodoCard key={index} index={index}>
+          <TodoCard key={index}>
             <CheckButton
               isChecked={element.isChecked}
               handleCheckChange={handleCheckChange}

@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
+
+import { TodoContext } from "../../../context/todo-context";
 
 import Textarea from "../../Textarea/Textarea";
 import TodoListFooter from "./TodoListFooter/TodoListFooter";
@@ -9,49 +11,32 @@ import TodoListCard from "../../Ui/TodoListCard";
 import DeleteIconMui from "../../Ui/Icons/DeleteIconMui";
 import EditIconMui from "../../Ui/Icons/EditIconMui";
 
-const TodoLists = (props) => {
-  const [todoStatus, SetTodoStatus] = useState({});
-
-  useEffect(() => {
-    const totolTodos = props.todos.length;
-    let todoDone = 0;
-    props.todos.map((todo) => {
-      if (todo.isChecked === true) {
-        todoDone++;
-      }
-      return todoDone;
-    });
-    SetTodoStatus({
-      done: todoDone,
-      left: totolTodos - todoDone,
-    });
-  }, [props.todos]);
+const TodoLists = () => {
+  const context = useContext(TodoContext);
 
   //check toggle
   const handleCheckChange = (e) => {
     const todo = e.currentTarget.parentElement.parentElement.parentElement;
     const index = todo.getAttribute("index");
     const todoChecked = todo[0].checked;
-    const newTodos = props.todos.map((todo, todoIndex) => {
+    const newTodos = context.todos.map((todo, todoIndex) => {
       if (todoIndex === parseInt(index)) {
         return { ...todo, isChecked: todoChecked };
       }
       return todo;
     });
-    props.setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
+    context.addTodoHandler(newTodos);
   };
 
   //delete the todo
   const handleDelete = (e) => {
     const todo = e.currentTarget.parentElement.parentElement;
     const index = todo.getAttribute("index");
-    const todoToRemove = [props.todos[index]];
-    const newTodos = props.todos.filter(
+    const todoToRemove = [context.todos[index]];
+    const newTodos = context.todos.filter(
       (element) => !todoToRemove.includes(element)
     );
-    props.setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
+    context.addTodoHandler(newTodos);
   };
 
   //focus on press edit the todo
@@ -69,21 +54,20 @@ const TodoLists = (props) => {
         "index"
       );
     const newText = todo.value;
-    const newTodos = props.todos.map((todo, todoIndex) => {
+    const newTodos = context.todos.map((todo, todoIndex) => {
       if (todoIndex === parseInt(index)) {
         return { ...todo, todo: newText };
       }
       return todo;
     });
-    props.setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
+    context.addTodoHandler(newTodos);
   };
 
   return (
     <TodoListCard>
-      {props.todos.map((element, index) => {
+      {context.todos.map((element, index) => {
         return (
-          <TodoCard key={index}>
+          <TodoCard key={index} index={index}>
             <CheckButton
               isChecked={element.isChecked}
               handleCheckChange={handleCheckChange}
@@ -98,7 +82,7 @@ const TodoLists = (props) => {
           </TodoCard>
         );
       })}
-      <TodoListFooter todoStatus={todoStatus} />
+      <TodoListFooter todoStatus={context.todoStatus} />
     </TodoListCard>
   );
 };

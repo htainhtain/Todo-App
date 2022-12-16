@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import TodoInput from "../Todo/TodoInput/TodoInput";
 import TodoLists from "../Todo/TodoLists/TodoLists";
@@ -6,18 +6,17 @@ import TodoLists from "../Todo/TodoLists/TodoLists";
 import "./Home.css";
 
 const Home = () => {
-  const todosStorage = JSON.parse(localStorage.getItem("todos") || "[]");
-  const [todos, setTodos] = useState(todosStorage);
-
   return (
     <section id="todo">
       <div className="todo-container">
         <div className="todo-content-container">
-          <div className="todo-container-title">
-            <h1>TODO</h1>
-          </div>
-          <TodoInput todos={todos} setTodos={setTodos} />
-          <TodoLists todos={todos} setTodos={setTodos} />
+          <main>
+            <header className="todo-container-title">
+              <h1>TODO</h1>
+            </header>
+          </main>
+          <TodoInput />
+          <TodoLists />
         </div>
       </div>
     </section>

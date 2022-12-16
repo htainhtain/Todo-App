@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TodoContext } from "../../../context/todo-context";
 
 import Textarea from "../../Textarea/Textarea";
 
@@ -7,7 +8,9 @@ import FormUi from "../../Ui/FormUi";
 
 import "./TodoInput.css";
 
-const TodoInput = (props) => {
+const TodoInput = () => {
+  const context = useContext(TodoContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let isChecked = e.target[0];
@@ -20,11 +23,8 @@ const TodoInput = (props) => {
   };
 
   const storeTodos = (todo) => {
-    const addedTodos = [...props.todos, todo];
-    props.setTodos((prevState) => {
-      return [...prevState, todo];
-    });
-    localStorage.setItem("todos", JSON.stringify(addedTodos));
+    const addedTodos = [...context.todos, todo];
+    context.addTodoHandler(addedTodos);
   };
 
   return (

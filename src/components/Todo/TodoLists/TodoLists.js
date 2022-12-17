@@ -15,10 +15,9 @@ const TodoLists = () => {
   const context = useContext(TodoContext);
 
   //check toggle
-  const handleCheckChange = (e) => {
-    const todo = e.currentTarget.parentElement.parentElement.parentElement;
-    const index = todo.getAttribute("index");
-    const todoChecked = todo[0].checked;
+  const handleCheckChange = (e, index) => {
+    const todoCheckInput = e.currentTarget;
+    const todoChecked = todoCheckInput.checked;
     const newTodos = context.todos.map((todo, todoIndex) => {
       if (todoIndex === parseInt(index)) {
         return { ...todo, isChecked: todoChecked };
@@ -29,12 +28,10 @@ const TodoLists = () => {
   };
 
   //delete the todo
-  const handleDelete = (e) => {
-    const todo = e.currentTarget.parentElement.parentElement;
-    const index = todo.getAttribute("index");
+  const handleDelete = (index) => {
     const todoToRemove = [context.todos[index]];
     const newTodos = context.todos.filter(
-      (element) => !todoToRemove.includes(element)
+      (todo) => !todoToRemove.includes(todo)
     );
     context.addTodoHandler(newTodos);
   };
@@ -47,12 +44,8 @@ const TodoLists = () => {
   };
 
   //handle text change in text area
-  const handleTextChange = (e) => {
+  const handleTextChange = (e, index) => {
     const todo = e.currentTarget;
-    const index =
-      e.currentTarget.parentElement.parentElement.parentElement.getAttribute(
-        "index"
-      );
     const newText = todo.value;
     const newTodos = context.todos.map((todo, todoIndex) => {
       if (todoIndex === parseInt(index)) {
@@ -70,15 +63,23 @@ const TodoLists = () => {
           <TodoCard key={index} index={index}>
             <CheckButton
               isChecked={element.isChecked}
-              handleCheckChange={handleCheckChange}
+              handleCheckChange={(e) => {
+                handleCheckChange(e, index);
+              }}
             />
             <Textarea
               todo={element.todo}
-              handleTextChange={handleTextChange}
+              handleTextChange={(e) => {
+                handleTextChange(e, index);
+              }}
               isChecked={element.isChecked}
             />
             <EditIconMui handleEdit={handleEdit} />
-            <DeleteIconMui handleDelete={handleDelete} />
+            <DeleteIconMui
+              handleDelete={() => {
+                handleDelete(index);
+              }}
+            />
           </TodoCard>
         );
       })}
